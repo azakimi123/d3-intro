@@ -1,22 +1,41 @@
 import React, {Component} from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 // import './App.css';
 
 import BarWrapper from './Components/ChartWrapper/BarWrapper';
 import LineWrapper from './Components/ChartWrapper/LineWrapper';
+import GenderDropdown from './Components/GenderDropdown';
 
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      gender: 'men'
+    }
+  }
+
+  genderSelection = (gender) => {
+    this.setState({gender: gender})
+  }
+
   render() {
+    console.log(this.state.gender)
   return (
     <div className="App">
       <Navbar bg="light">
         <Navbar.Brand>Barchartly</Navbar.Brand>
       </Navbar>
       <Container>
-        <BarWrapper />
-        {/* <LineWrapper /> */}
+        <Row>
+          <Col xs={12}><GenderDropdown genderFn={this.genderSelection}/></Col>
+        </Row>
+        <Row>
+          <Col xs={12}><BarWrapper gender={this.state.gender}/></Col>
+        </Row>
       </Container>
       {/* <svg width='400' height='500'>
         <circle cx='150' cy='100' r='80' fill='#C97BFF'></circle>
